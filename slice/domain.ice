@@ -27,6 +27,48 @@
 module model {
 
     /**
+     * The Persona
+     */
+     class Persona {
+
+        /**
+         * PK
+         */
+        int id;
+
+        /**
+         * Rut: 815184009
+         */
+        string rut;
+
+        /**
+         * Nombre
+         */
+        string nombre;
+
+        /**
+         * Direccion
+         */
+        string direccion;
+
+        /**
+         * Telefono fijo: +56 55 2355000
+         */
+        long telefonoFijo;
+
+        /**
+         * Telefono movil: +569 8123 1234
+         */
+        long telefonoMovil;
+
+        /**
+         * Correo electronico.
+         */
+        string email;
+
+     }
+
+    /**
      * The base system.
      */
      interface TheSystem {
