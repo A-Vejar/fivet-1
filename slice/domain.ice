@@ -29,7 +29,7 @@ module model {
     /**
      * The Persona
      */
-     class Persona {
+    class Persona {
 
         /**
          * PK
@@ -66,18 +66,18 @@ module model {
          */
         string email;
 
-     }
+    }
 
     /**
      * The base system.
      */
-     interface TheSystem {
+    interface TheSystem {
 
         /**
          * @return the diference in time between client and server.
          */
         long getDelay(long clientTime);
 
-     }
+    }
 
 }
