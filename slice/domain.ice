@@ -69,6 +69,75 @@ module model {
     }
 
     /**
+     * The Sexo.
+     */
+    enum Sexo {
+        MACHO,
+        HEMBRA
+    }
+
+    /**
+     * The Tipo of Paciente.
+     */
+    enum TipoPaciente {
+        INTERNO,
+        EXTERNO
+    }
+
+    /**
+     * The ficha
+     */
+    class Ficha {
+
+        /**
+         * PK.
+         */
+        int id;
+
+        /**
+         * Numero: 1554.
+         */
+        int numero;
+
+        /**
+         * Nombre: Firulay.
+         */
+        string nombre;
+
+        /**
+         * Especie: Canino.
+         */
+        string especie;
+
+        /**
+         * Fecha de Nacimiento.
+         * Format: ISO_ZONED_DATE_TIME
+         */
+        string fechaNacimiento;
+
+        /**
+         * Raza: Rottweiler.
+         */
+        string raza;
+
+        /**
+         * Color: rojo cobrizo.
+         */
+        string color;
+
+        /**
+         * Sexo: macho / hembra.
+         */
+        Sexo sexo;
+
+        /**
+         * TipoPaciente: interno/externo.
+         */
+        TipoPaciente tipoPaciente;
+
+    }
+
+    /**
      * The base system.
      */
     interface TheSystem {
