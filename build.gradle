@@ -90,6 +90,9 @@ subprojects {
 
         // Zero ICE
         implementation 'com.zeroc:ice:3.7.3'
+        // Compression for ZeroIce
+        // https://github.com/zeroc-ice/ice/tree/3.7/java#bzip2-compression
+        implementation 'org.apache.commons:commons-compress:1.20'
 
         // SLF4J
         implementation 'org.slf4j:slf4j-api:1.7.30'
