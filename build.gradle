@@ -63,6 +63,7 @@ subprojects {
     }
 
     // Both Client and Server projects share the *.ice Slice definitions
+    // Docs: https://github.com/zeroc-ice/ice-builder-gradle
     slice {
 
         // The home of ice
