@@ -27,27 +27,27 @@
 module model {
 
     /**
-     * The Persona
+     * The Persona.
      */
     class Persona {
 
         /**
-         * PK
+         * Primary Key.
          */
         int id;
 
         /**
-         * Rut: 815184009
+         * Rut: 815184009.
          */
         string rut;
 
         /**
-         * Nombre
+         * Nombre.
          */
         string nombre;
 
         /**
-         * Direccion
+         * Direccion.
          */
         string direccion;
 
@@ -85,12 +85,12 @@ module model {
     }
 
     /**
-     * The ficha
+     * The Ficha.
      */
     class Ficha {
 
         /**
-         * PK.
+         * Primary Key.
          */
         int id;
 
@@ -134,6 +134,73 @@ module model {
          * TipoPaciente: interno/externo.
          */
         TipoPaciente tipoPaciente;
+
+    }
+
+    /**
+     * The Control.
+     */
+    class Control {
+
+        /**
+         * PK.
+         */
+        int id;
+
+        /**
+         * Fecha.
+         * Format: ISO_ZONED_DATE_TIME
+         */
+        string fecha;
+
+        /**
+         * Fecha proximo control.
+         * Format: ISO_ZONED_DATE_TIME
+         */
+        string fechaProximoControl;
+
+        /**
+         * Temperatura.
+         */
+        float temperatura;
+
+        /**
+         * Peso.
+         */
+        float peso;
+
+        /**
+         * Altura.
+         */
+        float altura;
+
+        /**
+         * Diagnostico.
+         */
+        string diagnostico;
+
+    }
+
+    /**
+     * The Contratos.
+     */
+    interface Contratos {
+
+        /**
+         * Dado un numero de ficha, retorna la ficha asociada.
+         *
+         * @param numero de la ficha a obtener.
+         * @return the Ficha.
+         */
+        Ficha obtenerFicha(int numero);
+
+        /**
+         * Dado un numero de rut obtiene la persona.
+         *
+         * @param rut de la persona a buscar.
+         * @return the Persona.
+         */
+        Persona obtenerPersona(string rut);
 
     }
 
