@@ -43,6 +43,11 @@ public final class SystemServer {
     private static final Logger log = LoggerFactory.getLogger(SystemServer.class);
 
     /**
+     * The port to use.
+     */
+    private static final int PORT = 8080;
+
+    /**
      * Empty constructor.
      */
     private SystemServer() {
@@ -56,22 +61,31 @@ public final class SystemServer {
 
         log.debug("Starting the Server ..");
 
-        // The communicator
+        // Try with resources block - communicator is automatically destroyed at the end of this try block
         try (Communicator communicator = Util.initialize(getInitializationData(args))) {
 
-            // The adapter
-            ObjectAdapter adapter = communicator.createObjectAdapterWithEndpoints("TheAdapter", "default -p 8080 -z");
+            // Hook to shutdown any singleton class
+            Runtime.getRuntime().addShutdownHook(new Thread(() -> log.info("Shutting down!")));
+
+            // The adapter: https://doc.zeroc.com/ice/3.7/client-side-features/proxies/proxy-and-endpoint-syntax
+            // tpc (protocol) -z (compression) -t 15000 (timeout in ms) -p 8080 (port to bind)
+            ObjectAdapter theAdapter = communicator
+                    .createObjectAdapterWithEndpoints("TheAdapter", "tcp -z -t 15000 -p " + PORT);
 
             // Inline implementation (Lambda)
             TheSystem theSystem = (clientTime, current) -> System.currentTimeMillis() - clientTime;
 
-            // The unique identity
-            Identity identity = Util.stringToIdentity(TheSystem.class.getName());
-            log.debug("Using name [{}] and category [{}] as identity.", identity.name, identity.category);
+            // Register TheSystem in the framework
+            theAdapter.add(theSystem, Util.stringToIdentity(TheSystem.class.getName()));
 
-            // Register the API in the framework
-            adapter.add(theSystem, identity);
-            adapter.activate();
+            // Everything ok, let's go!
+            theAdapter.activate();
+
+            // List of endpoints
+            for (Endpoint endpoint : theAdapter.getEndpoints()) {
+                IPEndpointInfo in = (IPEndpointInfo) endpoint.getInfo();
+                log.debug("* Port: {}, Timeout: {}, Compression: {}.", in.port, in.timeout, in.compress);
+            }
 
             // .. waiting.
             log.debug("Waiting for connections ..");
